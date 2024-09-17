@@ -1,6 +1,7 @@
 using API_Farm.Data;
 using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 Env.Load();
 
@@ -21,7 +22,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(
+    c =>
+    {
+        c.SwaggerDoc("v1", new OpenApiInfo { Title = "API Farm", Version = "v1" });
+        // Enable Swagger Annotations
+        c.EnableAnnotations();
+    }
+);
 
 var app = builder.Build();
 
