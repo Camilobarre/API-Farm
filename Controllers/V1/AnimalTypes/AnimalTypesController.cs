@@ -23,9 +23,9 @@ namespace API_Farm.Controllers.V1.AnimalTypes
 
         [HttpGet]
         [SwaggerOperation(
-    Summary = "Retrieves all animal types",
-    Description = "Gets a list of all animal types in the database."
-)]
+            Summary = "Retrieves all animal types",
+            Description = "Gets a list of all animal types in the database."
+        )]
         [SwaggerResponse(200, "Returns a list of animal types.", typeof(IEnumerable<AnimalType>))]
         [SwaggerResponse(500, "An internal server error occurred.")]
         public async Task<IActionResult> GetAll()
@@ -36,6 +36,21 @@ namespace API_Farm.Controllers.V1.AnimalTypes
                 return NoContent();
             }
             return Ok(animalTypes);
+        }
+
+        [HttpGet("{id}")]
+        [SwaggerOperation(
+            Summary = "Retrieves a specific animal type by id",
+            Description = "Gets an animal type by its unique identifier."
+        )]
+        public async Task<IActionResult> GetById([FromRoute] int id)
+        {
+            var animalType = await Context.AnimalTypes.FindAsync(id);
+            if (animalType == null)
+            {
+                return NoContent();
+            }
+            return Ok(animalType);
         }
 
         [HttpPost]
