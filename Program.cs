@@ -26,8 +26,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(
     c =>
     {
-        c.SwaggerDoc("v1", new OpenApiInfo { Title = "API Farm", Version = "v1" });
-        c.SwaggerDoc("v2", new OpenApiInfo { Title = "API Farm", Version = "v2" });
+        c.SwaggerDoc("V1", new OpenApiInfo { Title = "API Farm", Version = "V1" });
+        c.SwaggerDoc("v2", new OpenApiInfo { Title = "API Farm", Version = "V2" });
         // Enable Swagger Annotations
         c.EnableAnnotations();
     }
