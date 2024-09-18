@@ -12,6 +12,7 @@ namespace API_Farm.Controllers.V2.AnimalTypes
 {
     [ApiController]
     [Route("api/V2/[controller]")]
+    [ApiExplorerSettings(GroupName = "v2")]
     public class AnimalTypesController : ControllerBase
     {
         private readonly ApplicationDbContext Context;
