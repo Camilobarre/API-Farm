@@ -17,6 +17,7 @@ namespace API_Farm.Data
         {
             base.OnModelCreating(modelBuilder);
             AnimalTypeSeeder.Seed(modelBuilder);
+            AnimalSeeder.Seed(modelBuilder);
         }
     }
 }
