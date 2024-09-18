@@ -81,20 +81,26 @@ namespace API_Farm.Controllers.V1.AnimalTypes
         [HttpPut("{id}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] AnimalType updatedAnimalType)
         {
-            if (ModelState.IsValid== false)
+            var animalType = CheckExistence(id);
+            if (animalType == false)
+            {
+                return NoContent();
+            }
+
+            updatedAnimalType.Id = id;
+            if (ModelState.IsValid == false)
             {
                 return BadRequest(ModelState);
             }
-            var animalType = await Context.AnimalTypes.FindAsync(id);
-            if (animalType == null)
-            {
-                return NotFound();
-            }
-            animalType.Name = updatedAnimalType.Name;
-            animalType.Description = updatedAnimalType.Description;
-            
+
+            Context.Entry(updatedAnimalType).State = EntityState.Modified;
             await Context.SaveChangesAsync();
             return Ok("Se actualizó el tipo de animal");
+        }
+
+        private bool CheckExistence(int id)
+        {
+            return Context.AnimalTypes.Any(e => e.Id == id);
         }
     }
 }
