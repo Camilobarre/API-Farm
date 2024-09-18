@@ -1,6 +1,7 @@
 using API_Farm.Data;
 using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
 Env.Load();
@@ -26,6 +27,7 @@ builder.Services.AddSwaggerGen(
     c =>
     {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "API Farm", Version = "v1" });
+        c.SwaggerDoc("v2", new OpenApiInfo { Title = "API Farm", Version = "v2" });
         // Enable Swagger Annotations
         c.EnableAnnotations();
     }
