@@ -98,6 +98,20 @@ namespace API_Farm.Controllers.V1.AnimalTypes
             return Ok("Se actualizó el tipo de animal");
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            var animalType = CheckExistence(id);
+            if (animalType == false)
+            {
+                return NoContent();
+            }
+
+            Context.AnimalTypes.Remove(await Context.AnimalTypes.FindAsync(id));
+            await Context.SaveChangesAsync();
+            return Ok("Se eliminó el tipo de animal");
+        }
+
         private bool CheckExistence(int id)
         {
             return Context.AnimalTypes.Any(e => e.Id == id);
